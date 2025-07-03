@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="fr" class="">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chanson Sur Mesure - Le Cadeau Inoubliable et Romantique</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* =================================================================
+         * 1. THEME & VARIABLES (Thème "Romance" avec Rose/Magenta)
+         * ================================================================= */
+        :root {
+            --background: 0 0% 100%;
+            --foreground: 224 71.4% 4.1%;
+            --card: 0 0% 100%;
+            --card-foreground: 224 71.4% 4.1%;
+            --popover: 0 0% 100%;
+            --popover-foreground: 224 71.4% 4.1%;
+            --primary: 340 85% 55%;
+            --primary-darker: 325 70% 45%;
+            --primary-foreground: 0 0% 100%;
+            --secondary: 340 80% 96%;
+            --secondary-foreground: 340 50% 30%;
+            --muted: 220 14.3% 95.9%;
+            --muted-foreground: 220 8.9% 46.1%;
+            --accent: 340 80% 96%;
+            --accent-foreground: 340 50% 30%;
+            --destructive: 0 84.2% 60.2%;
+            --destructive-foreground: 210 20% 98%;
+            --border: 220 13% 91%;
+            --input: 220 13% 91%;
+            --ring: 340 85% 55%;
+            --radius: 0.75rem;
+        }
+
+        .dark {
+            --background: 224 71.4% 4.1%;
+            --foreground: 210 20% 98%;
+            --card: 224 71.4% 4.1%;
+            --card-foreground: 210 20% 98%;
+            --popover: 224 71.4% 4.1%;
+            --popover-foreground: 210 20% 98%;
+            --primary: 340 85% 60%;
+            --primary-darker: 325 70% 50%;
+            --primary-foreground: 210 20% 98%;
+            --secondary: 340 20% 15%;
+            --secondary-foreground: 340 80% 96%;
+            --muted: 215 27.9% 16.9%;
+            --muted-foreground: 217.9 10.6% 64.9%;
+            --accent: 340 20% 15%;
+            --accent-foreground: 340 80% 96%;
+            --destructive: 0 62.8% 30.6%;
+            --destructive-foreground: 210 20% 98%;
+            --border: 215 27.9% 16.9%;
+            --input: 215 27.9% 16.9%;
+            --ring: 340 85% 60%;
+        }
+
+        /* =================================================================
+         * 2. STYLES GLOBAUX & RESET
+         * ================================================================= */
+        *, *::before, *::after { box-sizing: border-box; border-width: 0; border-style: solid; border-color: hsl(var(--border)); }
+        html { scroll-behavior: smooth; scroll-padding-top: 6rem; }
+        body { font-family: 'Inter', sans-serif; background-color: hsl(var(--background)); color: hsl(var(--foreground)); margin: 0; line-height: 1.6; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; overflow-x: hidden; }
+        .container { width: 100%; max-width: 1280px; margin-left: auto; margin-right: auto; padding: 0 1.5rem; }
+        section { padding: 8rem 0; position: relative; }
+        @media (max-width: 768px) { section { padding: 5rem 0; } }
+
+        /* =================================================================
+         * 3. COMPOSANTS (Boutons, Cartes, Badges...)
+         * ================================================================= */
+        .btn { display: inline-flex; align-items: center; justify-content: center; border-radius: var(--radius); font-size: 1rem; font-weight: 600; transition: all 0.2s ease; padding: 0.85rem 2rem; cursor: pointer; gap: 0.75rem; text-decoration: none; border: 1px solid transparent; }
+        .btn-primary { background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-darker))); color: hsl(var(--primary-foreground)); box-shadow: 0 10px 25px hsla(var(--primary), 0.3); position: relative; overflow: hidden; }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 15px 30px hsla(var(--primary), 0.4); }
+        .btn-primary::after { content: ''; position: absolute; top: -50%; left: -60%; width: 20px; height: 200%; background: rgba(255, 255, 255, 0.3); transform: rotate(25deg); transition: all 0.5s; }
+        .btn-primary:hover::after { left: 120%; }
+        .btn-secondary { background-color: hsl(var(--secondary)); color: hsl(var(--secondary-foreground)); border: 1px solid hsl(var(--border)); }
+        .btn-secondary:hover { background-color: hsla(var(--secondary), 0.8); border-color: hsla(var(--primary), 0.3); }
+        
+        /* FIX: Visibilité du bouton Thème en mode sombre */
+        .btn-ghost {
+            background-color: transparent;
+            border: 1px solid hsl(var(--border));
+            color: hsl(var(--muted-foreground));
+        }
+        .btn-ghost:hover {
+            background-color: hsl(var(--accent));
+            border-color: hsl(var(--primary));
+            color: hsl(var(--primary));
+        }
+        .dark .btn-ghost {
+            border-color: hsl(217, 11%, 45%); /* Bordure gris clair visible */
+        }
+        .dark .btn-ghost:hover {
+            background-color: hsla(var(--primary), 0.1); /* Lueur rose sur fond sombre */
+            border-color: hsl(var(--primary));
+            color: hsl(var(--primary));
+        }
+        .btn-icon { padding: 0.75rem; border-radius: 50%; width: 3rem; height: 3rem; }
+        
+        .card { background-color: hsl(var(--card)); color: hsl(var(--card-foreground)); border-radius: calc(var(--radius) + 4px); border: 1px solid hsl(var(--border)); box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); overflow: hidden; position: relative; }
+        .card:hover { border-color: hsla(var(--primary), 0.5); box-shadow: 0 20px 25px -5px rgba(0,0,0,0.05), 0 10px 10px -5px rgba(0,0,0,0.04); transform: translateY(-5px); }
+        .card-header, .card-content, .card-footer { padding: 2rem; }
+        .card-header { border-bottom: 1px solid hsl(var(--border)); padding-bottom: 1.5rem; }
+        .card-footer { border-top: 1px solid hsl(var(--border)); padding-top: 1.5rem; }
+        .badge { display: inline-flex; align-items: center; border-radius: var(--radius); background: linear-gradient(135deg, hsla(var(--primary), 0.1), transparent); color: hsl(var(--primary)); font-size: 0.85rem; font-weight: 600; padding: 0.5rem 1.25rem; border: 1px solid hsla(var(--primary), 0.2); backdrop-filter: blur(4px); }
+        .badge-primary { background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-darker))); color: hsl(var(--primary-foreground)); }
+        .icon { width: 1.25rem; height: 1.25rem; stroke-width: 1.8; }
+
+        /* =================================================================
+         * 4. STRUCTURE DE LA PAGE
+         * ================================================================= */
+        .header { position: sticky; top: 0; width: 100%; z-index: 50; background-color: hsla(var(--background), 0.92); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid hsl(var(--border)); transition: all 0.3s ease; }
+        .header.scrolled { box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+        .header .container { display: flex; align-items: center; justify-content: space-between; height: 5rem; }
+        .logo { display: flex; align-items: center; gap: 0.75rem; font-weight: 700; font-size: 1.35rem; color: hsl(var(--foreground)); text-decoration: none; transition: all 0.3s; }
+        .logo:hover { color: hsl(var(--primary)); }
+        .logo-icon { display: flex; align-items: center; justify-content: center; width: 2.5rem; height: 2.5rem; border-radius: var(--radius); background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-darker))); color: white; }
+        .nav { display: flex; align-items: center; gap: 1.5rem; }
+        .nav-links { display: flex; gap: 2rem; }
+        @media (max-width: 768px) { .nav-links { display: none; } }
+        .nav-link { font-size: 1rem; font-weight: 500; color: hsl(var(--muted-foreground)); text-decoration: none; transition: color 0.3s; position: relative; }
+        .nav-link:hover { color: hsl(var(--foreground)); }
+        .nav-link::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: hsl(var(--primary)); transition: width 0.3s ease; }
+        .nav-link:hover::after { width: 100%; }
+        
+        /* --- Section Héros --- */
+        .hero { text-align: center; padding: 10rem 0 8rem; position: relative; overflow: hidden; }
+        .hero-badge { margin-bottom: 1.5rem; display: inline-flex; align-items: center; gap: 0.5rem; animation: float 3s ease-in-out infinite; }
+        @keyframes float { 0% { transform: translateY(0); } 50% { transform: translateY(-8px); } 100% { transform: translateY(0); } }
+        .hero-title { font-size: 3.75rem; font-weight: 800; letter-spacing: -0.025em; margin: 0 auto 1.5rem; line-height: 1.15; max-width: 800px; background: linear-gradient(110deg, hsl(var(--foreground)) 55%, hsl(var(--primary-darker)) 80%, hsl(var(--primary))); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero-subtitle { font-size: 1.35rem; color: hsl(var(--muted-foreground)); max-width: 700px; margin: 0 auto 3rem; font-weight: 500; }
+        @media (max-width: 768px) { .hero { padding: 7rem 0 5rem; } .hero-title { font-size: 2.5rem; } .hero-subtitle { font-size: 1.15rem; } }
+        
+        /* --- Section Titres --- */
+        .section-header { text-align: center; margin-bottom: 5rem; position: relative; z-index: 2; }
+        .section-title { font-size: 2.5rem; font-weight: 800; letter-spacing: -0.025em; margin-bottom: 1rem; position: relative; display: inline-block; }
+        .section-title::after { content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 80px; height: 4px; background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--primary-darker))); border-radius: 2px; }
+        .section-description { font-size: 1.2rem; color: hsl(var(--muted-foreground)); max-width: 600px; margin: 2rem auto 0; }
+        @media (max-width: 768px) { .section-header { margin-bottom: 3.5rem; } .section-title { font-size: 2rem; } .section-description { font-size: 1.05rem; } }
+
+        /* --- Grille --- */
+        .grid { display: grid; gap: 2rem; }
+        .grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+        @media (max-width: 1024px) { .grid-cols-3 { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 640px) { .grid-cols-3 { grid-template-columns: 1fr; } }
+
+        /* --- Section "Comment ça marche" --- */
+        .step-card { text-align: center; padding: 2.5rem 2rem; position: relative; z-index: 1; overflow: hidden; }
+        .step-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 5px; background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--primary-darker))); opacity: 0; transition: opacity 0.3s ease; }
+        .step-card:hover::before { opacity: 1; }
+        .step-number { display: inline-block; width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, hsla(var(--primary), 0.1), transparent); color: hsl(var(--primary)); font-weight: 700; font-size: 1.1rem; line-height: 40px; margin-bottom: 1.5rem; }
+        .step-icon { display: inline-flex; align-items: center; justify-content: center; width: 5rem; height: 5rem; border-radius: 50%; background: linear-gradient(135deg, hsla(var(--primary), 0.05), transparent); color: hsl(var(--primary)); margin-bottom: 1.5rem; font-size: 2rem; }
+        .step-title { font-size: 1.4rem; font-weight: 700; margin-bottom: 1rem; }
+        .step-description { color: hsl(var(--muted-foreground)); font-size: 1.05rem; }
+
+        /* --- Section Tarifs --- */
+        .pricing-card { display: flex; flex-direction: column; position: relative; height: 100%; overflow: hidden; }
+        .pricing-card.popular {
+            background-color: hsl(var(--secondary)); /* FIX: Fond pour la lisibilité */
+            border: 2px solid transparent;
+            transform: scale(1.03);
+            box-shadow: 0 25px 50px -12px hsla(var(--primary), 0.25);
+            position: relative;
+            z-index: 1;
+        }
+        .pricing-card.popular::before {
+            content: '';
+            position: absolute;
+            top: -2px; left: -2px;
+            width: calc(100% + 4px);
+            height: calc(100% + 4px);
+            background: conic-gradient(from var(--angle), hsl(var(--primary)), hsl(var(--primary-darker)), hsl(var(--primary)));
+            border-radius: calc(var(--radius) + 6px);
+            z-index: -1;
+            animation: rotate-border 4s linear infinite;
+        }
+        @property --angle { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
+        @keyframes rotate-border { to { --angle: 360deg; } }
+        .pricing-card.popular .badge-primary { position: relative; z-index: 2; box-shadow: 0 2px 10px hsla(var(--primary), 0.3); }
+        @media (max-width: 1024px) { .pricing-card.popular { transform: scale(1); } }
+        
+        .pricing-header { padding-bottom: 1rem; position: relative; }
+        .pricing-title { font-size: 1.4rem; font-weight: 700; margin-bottom: 0.25rem; }
+        .pricing-description { font-size: 1rem; color: hsl(var(--muted-foreground)); margin-bottom: 1rem; }
+        /* NOUVELLE VERSION CORRIGÉE */
+        .pricing-price {
+            font-size: 2.75rem;
+            font-weight: 800;
+            margin: 1.5rem 0;
+            
+            /* Le dégradé devient un arrière-plan pour la div entière */
+            background: linear-gradient(110deg, hsl(var(--primary)), hsl(var(--primary-darker)));
+            
+            /* Le texte devient blanc et solide */
+            color: hsl(var(--primary-foreground)); /* --primary-foreground est déjà blanc */
+            
+            /* Améliorations visuelles pour créer un "bandeau" de prix */
+            padding: 0.75rem 1rem;
+            border-radius: var(--radius);
+            text-align: center;
+            box-shadow: 0 4px 15px hsla(var(--primary), 0.2);
+        }
+
+        .pricing-price span {
+            font-size: 1.1rem;
+            font-weight: 500;
+            
+            /* La devise "FCFA" devient également blanche mais légèrement transparente pour la hiérarchie */
+            color: hsla(0, 0%, 100%, 0.85); 
+        }
+        .feature-list { list-style: none; padding: 0; margin: 1.5rem 0; flex-grow: 1; }
+        .feature-list li { display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 1rem; font-size: 1.05rem; position: relative; padding-left: 1.75rem; }
+        .feature-list li::before { content: ''; position: absolute; left: 0; top: 0.5rem; width: 8px; height: 8px; border-radius: 50%; background: hsl(var(--primary)); }
+        .pricing-card .card-footer { margin-top: auto; padding-top: 1.5rem; }
+        .pricing-card .btn { width: 100%; font-size: 1.05rem; padding: 1rem; }
+        
+        /* --- Section Témoignages --- */
+        .testimonial-card { display: flex; flex-direction: column; justify-content: space-between; height: 100%; }
+        .testimonial-content { font-size: 1.1rem; color: hsl(var(--muted-foreground)); flex-grow: 1; position: relative; padding-left: 2rem; font-style: italic; }
+        .testimonial-content::before { content: '"'; position: absolute; left: 0; top: -0.5rem; font-size: 4rem; color: hsl(var(--primary)); opacity: 0.2; font-style: normal; line-height: 1; }
+        .testimonial-author { display: flex; align-items: center; gap: 1rem; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid hsl(var(--border)); }
+        .author-avatar { width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-darker))); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 1.2rem; flex-shrink: 0; }
+        .author-name { font-weight: 700; font-size: 1.1rem; }
+        .author-title { font-size: 0.95rem; color: hsl(var(--muted-foreground)); margin-top: 0.25rem; }
+
+        /* --- Section Démonstration --- */
+        .demo-section { background: linear-gradient(135deg, hsla(var(--primary), 0.03), transparent); }
+        .demo-section::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23e63980' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E"); opacity: 0.4; z-index: -1; }
+        .demo-container { display: flex; flex-wrap: wrap; gap: 4rem; align-items: center; }
+        .demo-content { flex: 1; min-width: 300px; }
+        .demo-title { font-size: 2.2rem; font-weight: 800; margin-bottom: 1.5rem; line-height: 1.3; }
+        .demo-description { font-size: 1.15rem; color: hsl(var(--muted-foreground)); margin-bottom: 2rem; line-height: 1.7; }
+        .video-container { flex: 1; min-width: 300px; position: relative; border-radius: var(--radius); overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); transform: perspective(1000px) rotateY(-5deg); transition: transform 0.5s ease; }
+        .video-container:hover { transform: perspective(1000px) rotateY(0deg); }
+        .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: var(--radius); }
+        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; border-radius: var(--radius); }
+        .highlight-item { display: flex; align-items: center; gap: 0.75rem; font-size: 1.05rem; font-weight: 500; }
+        .highlight-icon { display: flex; align-items: center; justify-content: center; width: 45px; height: 45px; border-radius: 50%; background: hsla(var(--primary), 0.1); color: hsl(var(--primary)); flex-shrink: 0; }
+        @media (max-width: 768px) { .demo-container { flex-direction: column; gap: 2rem; } .video-container { transform: none; width: 100%; } }
+
+        /* --- Section FAQ --- */
+        .faq-container { max-width: 800px; margin: 0 auto; }
+        .faq-item { margin-bottom: 1.5rem; border: 1px solid hsl(var(--border)); border-radius: var(--radius); overflow: hidden; }
+        .faq-question { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem; background: hsl(var(--card)); cursor: pointer; font-weight: 600; font-size: 1.1rem; }
+        .faq-answer { padding: 0 1.5rem; max-height: 0; overflow: hidden; transition: all 0.3s ease; }
+        .faq-answer.active { padding: 1.5rem; max-height: 500px; }
+
+        /* --- Section CTA & Footer --- */
+        .cta-section { background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-darker))); border-radius: var(--radius); padding: 4rem 2rem; margin: 8rem 0 0; position: relative; overflow: hidden; color: white; }
+        .cta-container { display: flex; align-items: center; justify-content: center; gap: 3rem; max-width: 1000px; margin: 0 auto; text-align: left; }
+        .cta-icon-container { flex-shrink: 0; }
+        .cta-icon-container .fa-whatsapp { font-size: 8rem; color: white; opacity: 0.8; }
+        .cta-content { flex-grow: 1; }
+        .cta-section .cta-title { font-size: 2.2rem; margin-bottom: 1rem; position: relative; }
+        .cta-section .cta-subtitle { font-size: 1.25rem; opacity: 0.9; margin: 0 0 2rem 0; max-width: 100%; position: relative; }
+        .cta-section .cta-button { font-size: 1.1rem; padding: 1rem 2rem; background-color: white; color: hsl(var(--primary)); border-color: white; }
+        .cta-section .cta-button:hover { background-color: rgba(255, 255, 255, 0.9); transform: translateY(-2px); }
+        @media (max-width: 768px) {
+            .cta-container { flex-direction: column; text-align: center; gap: 2rem; }
+            .cta-icon-container { display: none; }
+            .cta-section .cta-title { font-size: 2rem; }
+            .cta-section .cta-subtitle { margin-left: auto; margin-right: auto; }
+        }
+        
+        .footer { padding: 4rem 1.5rem 2rem; margin-top: 0; border-top: 1px solid hsl(var(--border)); text-align: center; color: hsl(var(--muted-foreground)); font-size: 0.95rem; }
+        .footer p { margin: 0.5rem 0; }
+        .contact-info { display: flex; justify-content: center; gap: 2rem; margin: 1.5rem 0; flex-wrap: wrap; }
+        .contact-item { display: flex; align-items: center; gap: 0.75rem; }
+        .social-links { display: flex; justify-content: center; gap: 1rem; margin: 2rem 0; }
+        .social-link { display: flex; align-items: center; justify-content: center; width: 45px; height: 45px; border-radius: 50%; background: hsl(var(--muted)); color: hsl(var(--foreground)); transition: all 0.3s ease; }
+        .social-link:hover { background: hsl(var(--primary)); color: white; transform: translateY(-3px); }
+
+        /* =================================================================
+         * 5. ANIMATIONS ROMANTIQUES ET MUSICALES
+         * ================================================================= */
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 15px hsla(var(--primary), 0.3), 0 10px 25px hsla(var(--primary), 0.3); }
+            50% { box-shadow: 0 0 30px hsla(var(--primary), 0.5), 0 10px 25px hsla(var(--primary), 0.4); }
+            100% { box-shadow: 0 0 15px hsla(var(--primary), 0.3), 0 10px 25px hsla(var(--primary), 0.3); }
+        }
+        .hero .btn-primary { animation: pulse-glow 2.5s infinite ease-in-out; }
+        .hero-animation-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: -1; }
+        .hero-animation-container > div { position: absolute; bottom: -50px; color: hsl(var(--primary)); font-size: 2rem; opacity: 0; animation: float-romantic 15s infinite linear; user-select: none; }
+        @keyframes float-romantic {
+            from { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0.6; }
+            to { transform: translateY(-100vh) translateX(20vw) rotate(360deg); opacity: 0; }
+        }
+        .hero-animation-container .note-1 { left: 10%; animation-duration: 12s; animation-delay: 0s; }
+        .hero-animation-container .note-2 { left: 20%; font-size: 1.5rem; animation-duration: 17s; animation-delay: 2s; transform-origin: -20vw; }
+        .hero-animation-container .heart-1 { left: 30%; font-size: 2.5rem; animation-duration: 14s; animation-delay: 1s; }
+        .hero-animation-container .note-3 { left: 40%; animation-duration: 18s; animation-delay: 5s; }
+        .hero-animation-container .heart-2 { left: 50%; font-size: 1.8rem; animation-duration: 13s; animation-delay: 3s; transform-origin: 30vw; }
+        .hero-animation-container .note-4 { left: 60%; font-size: 2.2rem; animation-duration: 16s; animation-delay: 7s; }
+        .hero-animation-container .heart-3 { left: 70%; animation-duration: 11s; animation-delay: 4s; }
+        .hero-animation-container .note-5 { left: 85%; font-size: 1.2rem; animation-duration: 20s; animation-delay: 6s; transform-origin: -15vw; }
+
+    </style>
+</head>
+<body>
+
+    <!-- ======================= HEADER ======================= -->
+    <header class="header">
+        <div class="container">
+            <a href="#" class="logo">
+                <div class="logo-icon">
+                    <i data-lucide="music-4" style="width: 1.5rem; height: 1.5rem;"></i>
+                </div>
+                <span>Chanson Sur Mesure</span>
+            </a>
+            <nav class="nav">
+                <div class="nav-links">
+                    <a href="#process" class="nav-link">Fonctionnement</a>
+                    <a href="#demo" class="nav-link">Démonstration</a>
+                    <a href="#pricing" class="nav-link">Tarifs</a>
+                    <a href="#testimonials" class="nav-link">Témoignages</a>
+                    <a href="#faq" class="nav-link">FAQ</a>
+                </div>
+    <button id="theme-toggle" class="btn btn-ghost btn-icon" aria-label="Toggle dark mode">
+        <i data-lucide="sun" class="icon" id="sun-icon"></i>
+        <i data-lucide="moon" class="icon" id="moon-icon" style="display: none;"></i>
+    </button>
+    <a href="Chanson_Surmesur_EN.html" class="btn btn-ghost" title="Switch to English">
+        EN
+    </a>
+    <a href="#cta" class="btn btn-primary">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    Commander
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <!-- ======================= SECTION HÉROS ======================= -->
+        <section class="hero" id="hero">
+            <div class="hero-animation-container">
+                <div class="note-1">♪</div>
+                <div class="note-2">♫</div>
+                <div class="heart-1">♥</div>
+                <div class="note-3">♫</div>
+                <div class="heart-2">♥</div>
+                <div class="note-4">♪</div>
+                <div class="heart-3">♥</div>
+                <div class="note-5">♪</div>
+            </div>
+            <span class="badge hero-badge">
+                <i data-lucide="sparkles" class="icon"></i>
+                Le cadeau le plus personnel au monde
+            </span>
+            <h1 class="hero-title">Transformez vos émotions en mélodie éternelle</h1>
+            <p class="hero-subtitle">Une chanson unique créée spécialement pour votre proche. Paroles personnalisées, musique originale, et un souvenir qui restera gravé à jamais dans les cœurs.</p>
+            <a href="#pricing" class="btn btn-primary">
+                <i data-lucide="gift" class="icon"></i>
+                Découvrir nos offres
+            </a>
+        </section>
+
+        <!-- ======================= SECTION "COMMENT ÇA MARCHE" ======================= -->
+        <section id="process">
+            <div class="section-header">
+                <h2 class="section-title">Un cadeau unique en 3 étapes simples</h2>
+                <p class="section-description">De votre histoire à une œuvre musicale, notre processus est conçu pour être simple, rapide et collaboratif.</p>
+            </div>
+            <div class="grid grid-cols-3">
+                <div class="card step-card">
+                    <div class="step-number">1</div>
+                    <div class="step-icon">
+                        <i data-lucide="file-text" style="width: 2rem; height: 2rem;"></i>
+                    </div>
+                    <h3 class="step-title">Racontez-nous votre histoire</h3>
+                    <p class="step-description">Partagez les anecdotes, les traits de caractère et les moments clés de la personne. Choisissez le style musical qui lui ressemble.</p>
+                </div>
+                <div class="card step-card">
+                    <div class="step-number">2</div>
+                    <div class="step-icon">
+                        <i data-lucide="pen-tool" style="width: 2rem; height: 2rem;"></i>
+                    </div>
+                    <h3 class="step-title">Nous créons la magie</h3>
+                    <p class="step-description">Nos paroliers et musiciens transforment vos idées en une composition originale : paroles, mélodie et arrangement sur mesure.</p>
+                </div>
+                <div class="card step-card">
+                    <div class="step-number">3</div>
+                    <div class="step-icon">
+                        <i data-lucide="send" style="width: 2rem; height: 2rem;"></i>
+                    </div>
+                    <h3 class="step-title">Recevez votre chef-d'œuvre</h3>
+                    <p class="step-description">Recevez la chanson en format MP3 haute qualité, prête à être offerte pour créer un moment inoubliable.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======================= SECTION DÉMONSTRATION ======================= -->
+        <section class="demo-section" id="demo">
+            <div class="container">
+                <div class="demo-container">
+                    <div class="demo-content">
+                        <h2 class="demo-title">Découvrez l'émotion d'une chanson personnalisée</h2>
+                        <p class="demo-description">
+                            Voyez par vous-même comment une simple idée se transforme en un souvenir musical inoubliable. 
+                            Notre vidéo de démonstration vous montre le processus de création et l'impact émotionnel 
+                            d'une chanson sur mesure offerte à un être cher.
+                        </p>
+                        <div class="demo-highlights">
+                            <div class="highlight-item">
+                                <div class="highlight-icon">
+                                    <i data-lucide="heart" style="width: 1.5rem; height: 1.5rem;"></i>
+                                </div>
+                                <span>Émotions authentiques capturées</span>
+                            </div>
+                            <div class="highlight-item">
+                                <div class="highlight-icon">
+                                    <i data-lucide="mic" style="width: 1.5rem; height: 1.5rem;"></i>
+                                </div>
+                                <span>Qualité professionnelle</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="video-container">
+                        <div class="video-wrapper">
+                            <iframe src="Lurane.mp4" allow="autoplay" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======================= SECTION TARIFS ======================= -->
+        <section id="pricing">
+            <div class="section-header">
+                <h2 class="section-title">Choisissez votre formule</h2>
+                <p class="section-description">Trois offres pensées pour tous les budgets et toutes les occasions. Laquelle créera votre prochain souvenir ?</p>
+            </div>
+            <div class="grid grid-cols-3">
+                <div class="card pricing-card">
+                    <div class="card-header pricing-header">
+                        <h3 class="pricing-title">Mélodie Simple</h3>
+                        <p class="pricing-description">Pour un message court et touchant</p>
+                        <div class="pricing-price">5 000 <span>FCFA</span></div>
+                    </div>
+                    <div class="card-content">
+                        <ul class="feature-list">
+                            <li>Paroles personnalisées</li>
+                            <li>Version texte et poème</li>
+                            <li>1 thème au choix</li>
+                            <li>Livraison en 48h</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://wa.me/237693699030" class="btn btn-secondary">Commander</a>
+                    </div>
+                </div>
+                <div class="card pricing-card popular">
+                    <div class="card-header pricing-header">
+                        <span class="badge badge-primary">Populaire</span>
+                        <h3 class="pricing-title">Création Complète</h3>
+                        <p class="pricing-description">L'expérience la plus choisie</p>
+                        <div class="pricing-price">10 000 <span>FCFA</span></div>
+                    </div>
+                    <div class="card-content">
+                        <ul class="feature-list">
+                            <li>Paroles personnalisées</li>
+                            <li>Musique originale composée</li>
+                            <li>3 styles musicaux au choix</li>
+                            <li>Fichier MP3 qualité studio</li>
+                            <li>Livraison en 72h</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://wa.me/237693699030" class="btn btn-primary">
+                            <i class="fa-brands fa-whatsapp"></i> Commander via WhatsApp
+                        </a>
+                    </div>
+                </div>
+                <div class="card pricing-card">
+                     <div class="card-header pricing-header">
+                        <h3 class="pricing-title">Expérience VIP</h3>
+                        <p class="pricing-description">Le cadeau ultime et inoubliable</p>
+                        <div class="pricing-price">15 000 <span>FCFA</span></div>
+                    </div>
+                    <div class="card-content">
+                        <ul class="feature-list">
+                            <li>Paroles personnalisées</li>
+                            <li>Musique qualité professionnelle</li>
+                            <li>Style musical sur mesure</li>
+                            <li>MP3 + partition instrumentale</li>
+                            <li>Montage vidéo avec vos photos</li>
+                            <li>Livraison prioritaire en 5 jours</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://wa.me/237693699030" class="btn btn-secondary">Commander</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======================= SECTION TÉMOIGNAGES ======================= -->
+        <section id="testimonials">
+            <div class="section-header">
+                <h2 class="section-title">Ils ont offert une chanson</h2>
+                <p class="section-description">Découvrez les émotions de ceux qui ont déjà fait confiance à notre art.</p>
+            </div>
+            <div class="grid grid-cols-3">
+                <div class="card testimonial-card">
+                    <div class="card-content">
+                        <p class="testimonial-content">Je ne savais pas à quoi m'attendre, mais le résultat a dépassé toutes mes espérances. Ma femme a pleuré de joie en entendant sa propre chanson. Merci pour ce moment magique.</p>
+                    </div>
+                    <div class="card-footer testimonial-author">
+                        <div class="author-avatar">JD</div>
+                        <div>
+                            <p class="author-name">Jean D.</p>
+                            <p class="author-title">Cadeau pour Anniversaire de Mariage</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card testimonial-card">
+                    <div class="card-content">
+                        <p class="testimonial-content">Le processus était super simple. J'ai envoyé quelques anecdotes sur mon meilleur ami et ils en ont fait une chanson de rock hilarante et touchante à la fois. C'était le clou de la soirée !</p>
+                    </div>
+                    <div class="card-footer testimonial-author">
+                        <div class="author-avatar">AK</div>
+                        <div>
+                            <p class="author-name">Amina K.</p>
+                            <p class="author-title">Cadeau pour un meilleur ami</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card testimonial-card">
+                    <div class="card-content">
+                        <p class="testimonial-content">Professionnalisme et talent. La qualité de l'enregistrement est top. Un service client à l'écoute et une livraison rapide. Je recommande à 100%.</p>
+                    </div>
+                    <div class="card-footer testimonial-author">
+                        <div class="author-avatar">CM</div>
+                        <div>
+                            <p class="author-name">Christian M.</p>
+                            <p class="author-title">Cadeau pour sa mère</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======================= SECTION FAQ ======================= -->
+        <section id="faq">
+            <div class="section-header">
+                <h2 class="section-title">Questions Fréquentes</h2>
+            </div>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Combien de temps faut-il pour créer une chanson ?</span>
+                        <i data-lucide="chevron-down" class="icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Le délai dépend de la formule choisie : 48h pour la "Mélodie Simple", 72h pour la "Création Complète", et 5 jours pour "l'Expérience VIP".</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Puis-je demander des modifications ?</span>
+                        <i data-lucide="chevron-down" class="icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Absolument ! Chaque commande inclut une révision gratuite pour garantir que la chanson corresponde parfaitement à vos attentes.</p>
+                    </div>
+                </div>
+                 <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Quels styles musicaux proposez-vous ?</span>
+                        <i data-lucide="chevron-down" class="icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Nous couvrons une large gamme de styles : Pop, Rock, R&B, Makossa, Bikutsi, Afrobeat, ballades romantiques, et bien plus encore sur demande.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Comment se déroule le paiement ?</span>
+                        <i data-lucide="chevron-down" class="icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Nous acceptons Mobile Money (MTN, Orange), les transferts bancaires et les paiements en espèces à Yaoundé. Un acompte de 50% est requis pour débuter.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======================= SECTION CTA FINAL ======================= -->
+        <section class="cta-section" id="cta">
+            <div class="cta-container">
+                <div class="cta-icon-container">
+                    <i class="fa-brands fa-whatsapp"></i>
+                </div>
+                <div class="cta-content">
+                    <h2 class="cta-title">Prêt à créer un souvenir inoubliable ?</h2>
+                    <p class="cta-subtitle">Contactez-nous directement sur WhatsApp. Notre équipe est prête à écouter votre histoire et à la transformer en musique.</p>
+                    <a href="https://wa.me/237693699030?text=Bonjour,%20je%20souhaite%20commander%20une%20chanson%20personnalisée." class="btn btn-ghost cta-button">
+                        <i class="fa-brands fa-whatsapp"></i>
+                        Démarrer la discussion
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ======================= FOOTER ======================= -->
+    <footer class="footer">
+        <div class="container">
+             <div style="display: flex; justify-content: center; margin-bottom: 1.5rem;">
+                <a href="#" class="logo" style="margin: 0;">
+                    <div class="logo-icon">
+                        <i data-lucide="music-4" style="width: 1.5rem; height: 1.5rem;"></i>
+                    </div>
+                    <span>Chanson Sur Mesure</span>
+                </a>
+            </div>
+            <div class="contact-info">
+                <div class="contact-item"> <i data-lucide="phone" class="icon"></i> <span>693 699 030</span> </div>
+                <div class="contact-item"> <i data-lucide="mail" class="icon"></i> <span>lmanfo.megasoft@gmail.com</span> </div>
+                <div class="contact-item"> <i data-lucide="map-pin" class="icon"></i> <span>Yaoundé, Carrefour MEEC</span> </div>
+            </div>
+            <div class="social-links">
+                <a href="#" class="social-link"> <i data-lucide="facebook" class="icon"></i> </a>
+                <a href="#" class="social-link"> <i data-lucide="instagram" class="icon"></i> </a>
+                <a href="#" class="social-link"> <i data-lucide="youtube" class="icon"></i> </a>
+            </div>
+            <p>© 2025 Chanson Sur Mesure. Tous droits réservés.</p>
+            <p>Conçu avec passion à Yaoundé, Cameroun.</p>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        const themeToggle = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+        const sunIcon = document.getElementById('sun-icon');
+        const moonIcon = document.getElementById('moon-icon');
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            htmlElement.classList.add(savedTheme);
+            if (savedTheme === 'dark') {
+                sunIcon.style.display = 'none';
+                moonIcon.style.display = 'inline-block';
+            }
+        } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            htmlElement.classList.add('dark');
+            sunIcon.style.display = 'none';
+            moonIcon.style.display = 'inline-block';
+        }
+        themeToggle.addEventListener('click', () => {
+            htmlElement.classList.toggle('dark');
+            const isDark = htmlElement.classList.contains('dark');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            sunIcon.style.display = isDark ? 'none' : 'inline-block';
+            moonIcon.style.display = isDark ? 'inline-block' : 'none';
+        });
+        const faqQuestions = document.querySelectorAll('.faq-question');
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                const icon = question.querySelector('.icon');
+                const isActive = answer.classList.contains('active');
+                document.querySelectorAll('.faq-answer.active').forEach(a => {
+                    if (a !== answer) {
+                        a.classList.remove('active');
+                        a.previousElementSibling.querySelector('.icon').style.transform = 'rotate(0deg)';
+                    }
+                });
+                answer.classList.toggle('active');
+                if (answer.classList.contains('active')) {
+                    icon.style.transform = 'rotate(180deg)';
+                } else {
+                    icon.style.transform = 'rotate(0deg)';
+                }
+            });
+        });
+        document.addEventListener('DOMContentLoaded', function() {
+            const animatedElements = document.querySelectorAll('.card, .section-header');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            animatedElements.forEach(el => {
+                el.style.opacity = "0";
+                el.style.transform = "translateY(30px)";
+                el.style.transition = "opacity 0.6s ease, transform 0.6s ease";
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>
